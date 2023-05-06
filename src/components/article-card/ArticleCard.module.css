@@ -1,0 +1,93 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 19px 30px;
+    width: 49%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-top: 58px;
+    margin-bottom: 38px;
+}
+
+.cardTop {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.cardTop a {
+    color: #949494;
+    text-decoration: underline;
+}
+
+.card p {
+    color: #000000;
+    opacity: 0.5;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+}
+
+.card h3 {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 31px;
+    letter-spacing: 0.02em;
+    font-family: 'Inter';
+}
+
+.newsButton {
+    background: #FFB64F;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000;
+    margin-bottom: 18px;
+    margin-top: 14px;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+}
+
+.text {
+    margin: 20px auto 32px auto;
+}
+
+.readButton {
+    background: #7CE3E1;
+    border-radius: 5px;
+    color: #000000;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    width: 40%;
+    height: 47px;
+    margin-bottom: 0;
+}
+
+.cardBottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    align-items: end;
+}
+
+.words {
+    width: fit-content;
+    height: fit-content;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .card {
+        width: 100%;
+    }
+
+    .readButton {
+        width: 70%;
+    }
+}

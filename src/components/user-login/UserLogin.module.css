@@ -1,0 +1,56 @@
+.userMenu {
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userMenu a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    letter-spacing: 0.01em;
+    color: #000000;
+    text-decoration: none;
+    opacity: 0.4;
+}
+
+.userMenu a:hover {
+    text-decoration: none;
+    color: #029491;
+}
+
+.line {
+    color: #029491;
+}
+
+.userButton {
+    cursor: pointer;
+    width: 65px;
+    height: 26px;
+    background: #7CE3E1;
+    border-radius: 5px;
+    font-family: 'Inter';
+    ont-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+
+  @media screen and (max-width: 1000px) {
+    /* header {
+      background-color: #0c88cf;
+      justify-content: right;
+    } */
+  
+    .userMenu {
+      display: none;
+    }
+
+}

@@ -1,0 +1,39 @@
+.limit {
+    width: fit-content;
+    height: fit-content;
+    background: #f1f0f0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    text-align: end;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000000;
+    opacity: 0.4;
+    padding: inherit;
+}
+
+.countCompanies {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 11px auto;
+}
+
+.countLimit {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8AC540;
+    margin-top: -5px;
+}
+
+@media screen and (max-width: 1000px) {
+    .limit {
+        display: none;
+    }
+}

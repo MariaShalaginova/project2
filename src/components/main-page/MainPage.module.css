@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    margin-right: -70px;
+}
+
+.info p {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    width: 72%;
+}
+
+.mainButton {
+    width: 45%;
+}
+
+.fotoFirst {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .info p {
+        margin-bottom: 32px
+    }
+
+    .fotoFirst img {
+        width: 100%;
+    }
+
+    .info button {
+        width: 83%;
+    }
+}

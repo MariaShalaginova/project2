@@ -1,0 +1,120 @@
+.summary p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #949494;
+}
+
+.carousel {
+    display: flex;
+    margin: 27px auto 70px auto;
+    align-items: center;
+}
+
+.summaryBlock {
+    /* width: fit-content; */
+    width: 100%;
+    height: 158px;
+    border: 2px solid #029491;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.card {
+    /* display: flex; */
+    display: none;
+}
+
+.carouselLoading {
+    width: 100%;
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carouselLoading p {
+    color: black;
+}
+
+.text {
+    width: fit-content;
+    padding: 17px 27px;
+    background: #029491;
+    border-radius: 10px 0px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.text p {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+}
+
+.data {
+    width: fit-content;
+    padding: 17px 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.data p {
+    color: black;
+}
+
+.vl {
+    border-left: 2px solid #949494;
+    opacity: 0.4;
+    height: auto;
+    margin: 17px 18px 17px 0px;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .summaryBlock {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .text {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .carouselLoading p {
+        display: none;
+    }
+
+    .carouselLoading {
+        height: auto;
+        margin: 10px;
+        /* height: inherit; */
+    }
+
+    .vl {
+        display: none;
+    }
+
+    .summary p {
+        font-size: 16px;
+        line-height: 19px;
+        /* padding: 17px 50px 17px 17px; */
+    }
+
+    .data {
+        width: 100%;
+        flex-direction: row;
+        padding: 17px 50px 17px 17px;
+    }
+}

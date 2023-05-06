@@ -1,0 +1,34 @@
+.user {
+    display: flex;
+    width: 13%;
+    justify-content: space-evenly;
+}
+
+.nameAndLogout {
+    text-align: end;
+    word-break: break-all;
+}
+
+.name {
+    opacity: 0.7;
+    margin-bottom: -5px;
+}
+
+.logout {
+    font-size: 10px;
+    line-height: 12px;
+    opacity: 0.4;
+}
+
+.user img {
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+    .user {
+        display: none;
+    }
+}

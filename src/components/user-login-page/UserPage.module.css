@@ -1,0 +1,52 @@
+.userPage {
+    width: 62%;
+}
+
+.userPageMobile {
+    display: none;
+    margin: auto auto 70px auto;
+}
+
+.userPage h1 {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: 0.02em;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.userPage img {
+    margin-left: 15%;
+}
+
+.wrapper {
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1000px) {
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .userPage{
+        width: 100%;
+        margin-bottom: 46px;
+    }
+
+    .userPage img {
+        display: none;
+    }
+
+    .userPage h1 {
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: 0.02em
+    }
+
+    .userPageMobile {
+        display: block;
+    }
+}

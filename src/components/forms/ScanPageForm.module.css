@@ -1,0 +1,184 @@
+.scanForm {
+    width: 100%;
+    display: flex;
+    height: fit-content;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-top: 47px;
+    margin-bottom: 64px;
+    padding: 29px 39px 32px 44px;
+}
+
+.leftSide {
+   width: 45%; 
+   display: flex;
+   flex-direction: column;
+}
+
+/* .leftSide label {
+    margin-bottom: 20px;
+} */
+
+.inn,
+.ton,
+.docs,
+.range {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.inn input,
+.ton input,
+.docs input {
+    width: 53%;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.date input {
+    width: 47%;
+}
+
+.leftSide span {
+    margin-left: 10px;
+}    
+
+.select {
+    display: block;
+	padding-left: 10px;
+	background-color: white;
+	width: 53%;
+    font-family: 'Inter';
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    height: 43px;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+::placeholder {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+
+.innInput::placeholder,
+.docsInput::placeholder,
+.date input::placeholder {
+    color: #949494;
+    opacity: 0.4;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox input {
+    height: auto;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 10px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.03em;
+    color: #000000;
+    opacity: 0.4;
+}
+
+input[type="checkbox"]:checked  {
+    box-shadow: 0 0 0 1px black;
+    background-color: white;
+}
+
+.checkbox label {
+    margin-bottom: 0;
+}
+
+:checked + span {
+    color: black;
+ }
+
+ .innSearch {
+    margin-top: 50px;
+    margin-left: auto;
+    width: 90%;
+ }
+
+ .innSearch p {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    color: #949494;
+    text-align: start;
+    margin-top: 5px;
+ }
+
+ .innSearchButton {
+    background: #8e9dfd;
+ }
+
+ /* .innSearchButton: */
+ .innSearchMobile {
+    display: none;
+ }
+
+ @media screen and (max-width: 1000px) {
+   
+    .checkbox {
+        display: none;
+    }
+
+    .innSearchMobile {
+        display: block;
+     }
+
+     .innSearch {
+        display: none;
+     }
+
+     .leftSide {
+        width: 100%;
+     }
+
+     .date {
+        flex-direction: column;
+        height: 100px;
+     }
+
+     .inn input,
+     .ton input,
+     .docs input,
+     .date input,
+     .select {
+        width: 100%;
+     }
+
+     .innSearchButton {
+        width: 100%;
+     }
+
+     .innSearchMobile p {
+        color: #949494;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+     }
+
+     .scanForm {
+        margin-bottom: 20px;
+        padding: 32px 26px 37px 14px
+     }
+ }    
