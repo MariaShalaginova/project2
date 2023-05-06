@@ -19,7 +19,7 @@ const UserLoginForm = () => {
     }    
 
     async function handleLogin() {
-        let user = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
+        let tokenInfo = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
@@ -30,20 +30,20 @@ const UserLoginForm = () => {
               })
           });
 
-        let result = await user.json(); 
-        localStorage.setItem('user', JSON.stringify(result));
+        let result = await tokenInfo.json(); 
+        localStorage.setItem('tokenInfo', JSON.stringify(result));
         // const savedUser = JSON.parse(localStorage.getItem('user'));
 
-        let response2 = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info", {
-            method: 'GET',
-            headers: {
-              'Authorization': 'Bearer ' + result.accessToken
-            } 
+        // let response2 = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info", {
+        //     method: 'GET',
+        //     headers: {
+        //       'Authorization': 'Bearer ' + result.accessToken
+        //     } 
         
-          });
+        //   });
 
-          let result2 = await response2.json();
-        console.log(result);
+        //   let result2 = await response2.json();
+        // console.log(result);
         
 
     }

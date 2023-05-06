@@ -11,13 +11,16 @@
 
 .name {
     opacity: 0.7;
-    margin-bottom: -5px;
+    margin-bottom: 5px;
 }
 
 .logout {
     font-size: 10px;
     line-height: 12px;
     opacity: 0.4;
+    height: auto;
+    background: transparent;
+    color: black;
 }
 
 .user img {

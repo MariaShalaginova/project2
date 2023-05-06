@@ -3,8 +3,8 @@ import css from './Header.module.css'
 import logo from '../../assets/logo.svg'
 import Headermenu from '../headermenu/Headermenu'
 import UserLogin from '../user-login/UserLogin'
-// import LimitCompanies from '../limit-companies/LimitCompanies'
-// import UserAvatar from '../user-avatar/UserAvatar'
+import LimitCompanies from '../limit-companies/LimitCompanies'
+import UserAvatar from '../user-avatar/UserAvatar'
 // import Loader from '../loader/Loader'
 import MobileMenu from "../mobile-menu/MobileMenu";
 // import { Route, Routes} from 'react-router-dom';
@@ -13,6 +13,8 @@ import MobileMenu from "../mobile-menu/MobileMenu";
 
 function Header() {
     
+    const token  = localStorage.getItem('tokenInfo')
+    console.log(token);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggleClick = () => {
@@ -40,8 +42,15 @@ function Header() {
                 
                 {/* <LimitCompanies /> */}
                 {/* <Loader /> */}
+            {token && (
                 <UserLogin /> 
-
+            )}    
+                
+            {!token && (<>
+                <LimitCompanies token={token}/>
+                <UserAvatar />
+                </>
+            )}
                 {/* <UserAvatar /> */}
                 {/* {<UserLogin />&&()} */}
                 {/* <img src="/img/user-avatar.svg" alt="user-avatar"/>

@@ -3,7 +3,8 @@
     height: fit-content;
     background: #f1f0f0;
     border-radius: 5px;
-    padding: 5px 10px;
+    /* padding: 5px; */
+    padding: 5px 10px 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -14,7 +15,11 @@
     line-height: 12px;
     color: #000000;
     opacity: 0.4;
-    padding: inherit;
+    padding: 15px 15px 3px;
+    /* height: 70px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .countCompanies {
