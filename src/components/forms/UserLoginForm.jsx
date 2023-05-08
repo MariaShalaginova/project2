@@ -1,12 +1,16 @@
 import css from './UserLoginForm.module.css';	
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import lockLogin from '../../assets/lock-login.svg'
+import { useNavigate } from 'react-router-dom';
 
-const UserLoginForm = () => {
+const UserLoginForm = (props) => { 
+
+    const {setToken} = props;
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    const navigate = useNavigate();
 
     function handleLoginChange(e) {
         setLogin(e.target.value);
@@ -18,20 +22,23 @@ const UserLoginForm = () => {
         setButtonDisabled(!login || !e.target.value);
     }    
 
-    async function handleLogin() {
-        let tokenInfo = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
+    async function handleLogin(e) {
+        const tokenInfo = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                "login": "sf_student1",
-                "password": "4i2385j"
+                "login": login,
+                "password": password
               })
           });
 
-        let result = await tokenInfo.json(); 
+        const result = await tokenInfo.json(); 
+        
         localStorage.setItem('tokenInfo', JSON.stringify(result));
+        setToken(JSON.stringify(result));
+        navigate('/')
         // const savedUser = JSON.parse(localStorage.getItem('user'));
 
         // let response2 = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info", {
@@ -59,20 +66,20 @@ const UserLoginForm = () => {
                     <button type="button" className={css.loginButton}>Войти</button>
                     <button type="button" className={css.loginButton}>Зарегистрироваться</button>
                 </div>
-                <form>
+                <form  onSubmit={handleLogin}>
                     <div className={css.login}>
-                        <label htmlFor id="login">Логин или номер телефона:</label>
+                        <label htmlFor="true" id="login">Логин или номер телефона:</label>
                         <input type="text" name="login" id="login" value={login} onChange={handleLoginChange}></input>
                     </div>
                     <div className={css.login}>
-                        <label htmlFor id="password">Пароль:</label>
+                        <label htmlFor="true" id="password">Пароль:</label>
                         <input type="password" name="password" id="password"  value={password} onChange={handlePasswordChange}></input>
                     </div>
                     <button type="button" onClick={handleLogin} disabled={buttonDisabled}>Войти</button>
 
                 </form>
                 <div className={css.restore}>
-                    <a href='#'>Восстановить пароль</a>
+                   <p>Восстановить пароль</p>
                 </div>
                 <p>
                     Войти через:

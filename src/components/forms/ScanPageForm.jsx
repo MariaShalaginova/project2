@@ -58,7 +58,7 @@ const ScanPageForm = () => {
                     <form>
 
                     <div className={css.inn}>
-                        <label htmlFor id="inn">Инн компании<span>&#8432;</span></label>
+                        <label htmlFor="true" id="inn">Инн компании<span>&#8432;</span></label>
                         <input className={css.innInput} type="number" name="inn" id="inn" placeholder='10 цифр' required></input>
                     </div>
                     
@@ -72,7 +72,7 @@ const ScanPageForm = () => {
                         </select>
                     </div>
                     <div className={css.docs}>
-                        <label htmlFor id="quantity">Количество документов в выдаче<span>&#8432;</span></label>
+                        <label htmlFor="true" id="quantity">Количество документов в выдаче<span>&#8432;</span></label>
                         <input className={css.docsInput} type="number" name="quantity" id="quantity" placeholder='От 1 до 1000' min='1' max='1000' required></input>
                     </div>
                     <div className={css.range}>

@@ -4,7 +4,7 @@ import UserFoto from '../../assets/user-mini-foto.jpg'
 const UserAvatar = () => {
 
     const handleLogout = () => {
-        localStorage.removeItem('userData');
+        localStorage.removeItem('tokenInfo');
         window.location.href = '/';
     }
 

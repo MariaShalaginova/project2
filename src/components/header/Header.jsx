@@ -11,10 +11,13 @@ import MobileMenu from "../mobile-menu/MobileMenu";
 // import UserPage from '../user-login-page/UserPage'
 
 
-function Header() {
+function Header(props) {  
     
-    const token  = localStorage.getItem('tokenInfo')
+    //const {token} = props;
+
+    let token  = localStorage.getItem('tokenInfo')
     console.log(token);
+    token = JSON.parse(token);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggleClick = () => {
@@ -27,13 +30,13 @@ function Header() {
             <div>
                 <img src={logo} alt="logo" />
             </div>
-            <div className={css.gamburger}>
+            {/* <div className={css.gamburger}>
                 <button type="button" className={css.toggle} onClick={handleToggleClick}>
                     <span className={css.line}></span>
                     <span className={css.line}></span>
                     <span className={css.line}></span>
                 </button>      
-            </div>
+            </div> */}
 
             {isOpen && (<MobileMenu />)}
             {/* <div className={css.userMenu}>{UserLogin} */}
@@ -42,11 +45,11 @@ function Header() {
                 
                 {/* <LimitCompanies /> */}
                 {/* <Loader /> */}
-            {token && (
+            {!token && (
                 <UserLogin /> 
             )}    
                 
-            {!token && (<>
+            {token && (<>
                 <LimitCompanies token={token}/>
                 <UserAvatar />
                 </>
@@ -55,7 +58,14 @@ function Header() {
                 {/* {<UserLogin />&&()} */}
                 {/* <img src="/img/user-avatar.svg" alt="user-avatar"/>
                 <img src="/img/arrow-down.svg" alt="user-arrow"/> */}
-               
+            <div className={css.gamburger}>
+                <button type="button" className={css.toggle} onClick={handleToggleClick}>
+                    <span className={css.line}></span>
+                    <span className={css.line}></span>
+                    <span className={css.line}></span>
+                </button>      
+            </div>
+
         </header>
     )
 }

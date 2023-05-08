@@ -2,8 +2,10 @@ import css from './UserPage.module.css';
 import people from '../../assets/user-page.jpg';
 import UserLoginForm from '../forms/UserLoginForm';
 
-const UserPage = () => {
+const UserPage = (props) => {
     
+    const {setToken} = props;
+
     return (
         <div className={css.wrapper}>
             
@@ -14,7 +16,7 @@ const UserPage = () => {
                 {/* <div className={css.formBlock}>
                     <UserLoginForm />
                 </div> */}
-                <UserLoginForm />
+                <UserLoginForm setToken={setToken}/>
                 <div className={css.userPageMobile}>
                     <img src={people} alt="people"/>
                 </div>

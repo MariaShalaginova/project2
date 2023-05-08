@@ -7,6 +7,7 @@ const LimitCompanies = (props) => {
     const {token} = props;
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [companyData, setCompanyData] = useState({});
 
     useEffect(() => {
 
@@ -17,7 +18,7 @@ const LimitCompanies = (props) => {
           }
           fetchData();
          
-      });
+      }, []);
 
     
     async function getCompanies() {
@@ -33,8 +34,7 @@ const LimitCompanies = (props) => {
 
         const result = await response.json();
         setIsLoading(false);
-
-        return result;
+        setCompanyData(result.eventFiltersInfo);        
     }
      
 
@@ -48,8 +48,8 @@ const LimitCompanies = (props) => {
                     <p>Лимит по компаниям</p>
                 </div>
                 <div className={css.count}>
-                    <p className={css.countCompanies}>34</p>
-                    <p className={css.countLimit}>100</p>
+                    <p className={css.countCompanies}>{companyData.usedCompanyCount}</p>
+                    <p className={css.countLimit}>{companyData.companyLimit}</p>
                 </div>
                 </>
                  )

@@ -5,7 +5,7 @@
     border-radius: 5px;
     padding: 5px 10px;
     /*  background: none repeat scroll 0 0 #ffffff; */
-position: relative;
+    position: relative;
 /* bottom: 0;
 left: 0;
 right: 0;
@@ -24,6 +24,7 @@ width: 100%; */
     box-sizing:border-box;
     position:relative;
     top:auto;
+    margin: auto;
     /* left:40%; */
     /* margin-top:-80px;
     margin-left:-80px; */

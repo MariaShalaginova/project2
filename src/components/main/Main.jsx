@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainPage from "../main-page/MainPage";
 import AboutCompany from "../about-company/AboutCompany";
 import Rates from "../rates/Rates";
@@ -7,6 +7,15 @@ import Rates from "../rates/Rates";
 // import UserPage from "../user-login-page/UserPage"
 
 const Main = () => {
+    const token  = localStorage.getItem('tokenInfo')
+
+    useEffect(() => {
+
+      if(token){
+        
+      }
+         
+      }, []);
     
     return (
         <main>

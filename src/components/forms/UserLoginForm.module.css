@@ -45,6 +45,11 @@
     margin: 0 5px;
 }
 
+button:disabled {
+    background-color: #abb6fa;
+    cursor: not-allowed;
+    }
+
 /* .loginButton:active,
 .loginButton:hover {
     color: #029491;
