@@ -15,9 +15,9 @@
    flex-direction: column;
 }
 
-/* .leftSide label {
-    margin-bottom: 20px;
-} */
+.leftSide label {
+    color: #000000;
+}
 
 .inn,
 .ton,
@@ -74,9 +74,27 @@
 
 .innInput::placeholder,
 .docsInput::placeholder,
-.date input::placeholder {
+.dateInput::placeholder {
     color: #949494;
     opacity: 0.4;
+}
+
+/* .inputInvalid:focus {
+    border-color: red;
+} */
+
+.invalid:focus {
+    border: 1px solid #FF5959;
+    box-shadow: 0px 0px 20px rgba(255, 89, 89, 0.2);
+}
+
+.invalid {
+    border: 1px solid #FF5959;
+    box-shadow: 0px 0px 20px rgba(255, 89, 89, 0.2);
+}
+
+.invalidSpan {
+    color: #FF5959;
 }
 
 .checkbox {
@@ -103,6 +121,11 @@ input[type="checkbox"]:checked  {
     background-color: white;
 }
 
+.docsInput:out-of-range {
+    border: 1px solid #FF5959;
+    box-shadow: 0px 0px 20px rgba(255, 89, 89, 0.2);
+}
+
 .checkbox label {
     margin-bottom: 0;
 }
@@ -126,9 +149,25 @@ input[type="checkbox"]:checked  {
     margin-top: 5px;
  }
 
- .innSearchButton {
+ .message {
+    /* display: none; */
+    width: 90%;
+    margin-top: .25rem;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.01em;
+    color: #FF5959;
+}
+
+.form {
+    flex-direction: row;
+}
+ /* .innSearchButton {
     background: #8e9dfd;
- }
+ } */
 
  /* .innSearchButton: */
  .innSearchMobile {

@@ -16,7 +16,7 @@ function Header(props) {
     //const {token} = props;
 
     let token  = localStorage.getItem('tokenInfo')
-    console.log(token);
+    // console.log(token);
     token = JSON.parse(token);
     const [isOpen, setIsOpen] = useState(false);
 

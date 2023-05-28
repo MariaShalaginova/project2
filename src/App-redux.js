@@ -22,7 +22,10 @@ import { useState } from "react";
 
 function ReduxApp() {
 
-  const [token, setToken] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState('');
+  const [histogram, setHistogram] = useState([]);
+  const [article, setArticle] = useState({});
     const handleChange = (token) => {
         setToken(token)
     }
@@ -33,8 +36,8 @@ function ReduxApp() {
               <Routes>
                 <Route exact path="/" element={<Main />} />
                 <Route path="/login" element={<UserPage setToken={handleChange} />} /> 
-                <Route path="/scan" element={<ScanPage />}  /> 
-                <Route path="/result" element={<ResultPage />} /> 
+                <Route path="/scan" element={<ScanPage token = {token} histogram = {histogram} setHistogram = {setHistogram} isLoading={isLoading} setIsLoading={setIsLoading} setArticle={setArticle}/>}  /> 
+                <Route path="/result" element={<ResultPage token = {token} histogram = {histogram} isLoading={isLoading} article={article}/>} /> 
                 <Route path="/rates" element={<Rates />} />
               </Routes>
               

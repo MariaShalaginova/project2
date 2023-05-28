@@ -5,7 +5,9 @@ import css from './ResultCarousel.module.css';
 import ChevronLeft from '../../assets/chevron-left.svg';
 import ChevronRight from '../../assets/chevron-right.svg';
 
-const ResultLoading= () => {
+const ResultLoading= (props) => {
+    
+    const {token} = props;
     
     return (
         <div>

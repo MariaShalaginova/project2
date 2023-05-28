@@ -2,6 +2,9 @@ import css from './ArticleCard.module.css';
 import img from '../../assets/article-img.jpg';
 
 const ArticleCard = () => {
+
+
+    
     return (
         <div className={css.card}>
             <div className={css.cardTop}> 

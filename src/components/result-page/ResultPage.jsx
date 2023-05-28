@@ -7,7 +7,22 @@ import resultImg from '../../assets/result-img.png'
 import Result from '../result-carousel/ResultCarousel';
 import ArticleCard from '../article-card/ArticleCard';
 
-const ResultPage = () => {
+const ResultPage = (props) => {
+    const {token, isLoading, histogram, article} = props;
+
+    console.log(article);
+
+    //изменение окончания слова "Вариант" в зависимости от количества 
+    function pluralize(count, singular, plural) {
+        
+        // Если count равен 1, вернуть singular
+        if (count === 1) {
+          return singular;
+        }
+        // Если count не равен 1, вернуть plural
+        return plural;
+      }
+
     return (
         <div className={css.wrapper}>
             <div className={css.content}>
@@ -24,8 +39,8 @@ const ResultPage = () => {
             </div>
             <div className={css.summary}>   
                 <h3>Общая сводка</h3>
-                <p>Найдено 100 вариантов</p>
-                <Result />
+                <p>Найдено {histogram.length} {pluralize(histogram.length, 'вариант', 'варианта', 'вариантов')}</p>
+                <Result token={token} histogram={histogram} isLoading={isLoading}/>
                 
             </div>         
             <h3>Список документов</h3>

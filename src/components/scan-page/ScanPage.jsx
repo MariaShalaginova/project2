@@ -4,7 +4,9 @@ import folders from '../../assets/folders.svg';
 import scanImg from '../../assets/scan-img.png';
 import ScanPageForm from '../forms/ScanPageForm';
 
-const ScanPage = () => {
+const ScanPage = (props) => {
+
+    const {token, isLoading, setIsLoading, setHistogram, setArticle} = props;
     return (
         <div className={css.wrapper}>
             
@@ -15,7 +17,7 @@ const ScanPage = () => {
                     <div className={css.docsMobile}>
                         <img src={paper} alt="document"/>
                     </div>    
-                    <ScanPageForm />    
+                    <ScanPageForm token={token} setHistogram={setHistogram} isLoading={isLoading} setIsLoading={setIsLoading} setArticle={setArticle}/>    
                 </div>
                 <div className={css.images}>
                     <div className={css.docs}>

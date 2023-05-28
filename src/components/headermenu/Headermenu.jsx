@@ -7,10 +7,12 @@ function Headermenu() {
            
                 <ul className={css.navigation}>
                 <Link to='/'>
-                    <li className={css.item}><a href="#">Главная</a></li>
+                    <li className={css.item}>Главная</li>
                 </Link> 
-                    <li className={css.item}><a href="#">Тарифы</a></li>
-                    <li className={css.item}><a href="#">FAQ</a></li>
+                <Link to="/rates">
+                    <li className={css.item}>Тарифы</li>
+                </Link>    
+                    <li className={css.item}>FAQ</li>
                 </ul>
             
         </nav>

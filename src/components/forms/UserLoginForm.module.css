@@ -22,6 +22,19 @@
     padding: 25px;
 }
 
+.message {
+    /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.01em;
+    color: #FF5959;
+}
+
 /* form {
     display: flex;
     flex-direction: column;
@@ -43,12 +56,13 @@
     border-bottom: 3px solid #C7C7C7;
     border-radius: 0px;
     margin: 0 5px;
+    /* border-color: #dc3545; */
 }
 
-button:disabled {
+/* button:disabled {
     background-color: #abb6fa;
     cursor: not-allowed;
-    }
+    } */
 
 /* .loginButton:active,
 .loginButton:hover {
@@ -62,6 +76,9 @@ button:disabled {
     border-bottom: 3px solid #029491;
 }
 
+.invalid {
+    border-color: red;
+  }
 /* form {
     display: flex;
     flex-direction: column;

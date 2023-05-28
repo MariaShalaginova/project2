@@ -24,6 +24,17 @@
     justify-content: space-between;
 }
 
+.textMobile {
+    display: none;
+}
+
+.par {
+    font-size: 10px;
+    line-height: 12px;
+    color: #000000;
+    opacity: 0.4;
+}
+
 .countCompanies {
     font-weight: 700;
     font-size: 14px;
@@ -43,5 +54,23 @@
     .limit {
         min-width: 132px;
         min-height: 75px;
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    .text, .count {
+        display: none;
+    }
+
+    .textMobile {
+        display: block;
+    }
+
+    .countCompanies {
+        margin: 5px auto;
+    }
+
+    .countLimit {
+        margin-top: 5px;
     }
 }

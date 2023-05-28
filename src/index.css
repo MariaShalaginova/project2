@@ -112,6 +112,10 @@ input {
   border-radius: 5px;
 }
 
+/* input:required {
+
+} */
+
 
 .content {
   /* flex: 1;
@@ -146,6 +150,19 @@ button {
   color: #FFFFFF;
   margin: inherit;
   cursor: pointer;
+}
+
+button:disabled {
+  background-color: #abb6fa;
+  cursor: not-allowed;
+}
+
+/* input:invalid:focus {
+  border-color: red;
+} */
+
+.invalid {
+  border-color: red;
 }
 
 @media screen and (max-width: 1000px) {

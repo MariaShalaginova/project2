@@ -10,11 +10,17 @@ const UserLoginForm = (props) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    // const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    // const pattern = /^(?=.*[a-zA-Z])[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*(\+[1-9]\d{1,14}|[0-9]{7,14})?$/;
+    // const pattern =  /^[a-z0-9_-]{3,16}$/
     function handleLoginChange(e) {
         setLogin(e.target.value);
         setButtonDisabled(!e.target.value || !password);
+        // if (!login) {
+        //     setError('Введите корректные данные')
+        // }
     }
     
     function handlePasswordChange(e) {
@@ -40,22 +46,7 @@ const UserLoginForm = (props) => {
         setToken(JSON.stringify(result));
         navigate('/')
         // const savedUser = JSON.parse(localStorage.getItem('user'));
-
-        // let response2 = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info", {
-        //     method: 'GET',
-        //     headers: {
-        //       'Authorization': 'Bearer ' + result.accessToken
-        //     } 
-        
-        //   });
-
-        //   let result2 = await response2.json();
-        // console.log(result);
-        
-
     }
-
-
 
     return (
         
@@ -68,12 +59,14 @@ const UserLoginForm = (props) => {
                 </div>
                 <form  onSubmit={handleLogin}>
                     <div className={css.login}>
-                        <label htmlFor="true" id="login">Логин или номер телефона:</label>
+                        <label htmlFor="login" id="login">Логин или номер телефона:</label>
                         <input type="text" name="login" id="login" value={login} onChange={handleLoginChange}></input>
+                        {/* {pattern.test(login) && (<div className={css.message}>Введите корректные данные</div>)} */}
                     </div>
                     <div className={css.login}>
-                        <label htmlFor="true" id="password">Пароль:</label>
+                        <label htmlFor="password" id="password">Пароль:</label>
                         <input type="password" name="password" id="password"  value={password} onChange={handlePasswordChange}></input>
+                        {!password && (<div className={css.message}>Неправильный пароль</div>)}
                     </div>
                     <button type="button" onClick={handleLogin} disabled={buttonDisabled}>Войти</button>
 
