@@ -13,7 +13,7 @@ import "./slick-theme.css";
 
 const Result= (props) => {
     const {isLoading, histogram } = props;
-
+    
     const settings = {
         dots: false,
         infinite: false,
@@ -80,18 +80,21 @@ const Result= (props) => {
                             {
                                 histogram.length? 
                                 histogram.map((company, index) => {
-                                    const date = new Date(company.date);
+                                    // const date = new Date(company.date);
 
-                                    const year = date.getFullYear();
-                                    const month = ('0' + (date.getMonth() + 1)).slice(-2); // добавляем ноль в начале, если месяц < 10
-                                    const day = ('0' + date.getDate()).slice(-2); // добавляем ноль в начале, если число < 10
-                                
+                                    // const year = date.getFullYear();
+                                    // const month = ('0' + (date.getMonth() + 1)).slice(-2); // добавляем ноль в начале, если месяц < 10
+                                    // const day = ('0' + date.getDate()).slice(-2); // добавляем ноль в начале, если число < 10
+                                    const date = new Date(company.date).toLocaleDateString()
                                 
                                     return (
                                         <>
                                             <div className={css.item}>
                                                 <div className={css.data} key={index}>
-                                                    <p>{day}.{month}.{year}</p>
+                                                    {/* <p>{day}.{month}.{year}</p>
+                                                    <p>{company.numberDosc}</p>
+                                                    <p>{company.riskNumber}</p> */}
+                                                    <p>{date}</p>
                                                     <p>{company.numberDosc}</p>
                                                     <p>{company.riskNumber}</p>
                                                 </div>

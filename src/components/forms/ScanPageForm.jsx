@@ -1,17 +1,37 @@
 import css from './ScanPageForm.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from 'clsx';
 // import lockLogin from '../../assets/lock-login.svg'
 
 const ScanPageForm = (props) => {
-
+    
     const {isLoading, setIsLoading, setHistogram, setArticle} = props;
+    const navigate = useNavigate();
+    useEffect(() => {
+        
+        let token  = localStorage.getItem('tokenInfo');
+
+        //если нет токена, то перенаправление на страницу авторизации
+        if (!token) {
+            navigate('/login');
+        } else {
+            token = JSON.parse(token);
+        
+            const expireDate = token.expire; // сравниваем текущую дату с датой истечения токена
+          
+            if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {
+              localStorage.removeItem("tokenInfo"); // Удалить данные из localStorage
+              navigate('/login'); // Перенаправление на страницу авторизации
+            }
+        }        
+      }, []);
+
     let token  = localStorage.getItem('tokenInfo')
     // console.log(token);
     token = JSON.parse(token);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [inn, setInn] = useState('');
     const [selectedOption, setSelectedTonality] = useState('any');
@@ -73,42 +93,20 @@ const ScanPageForm = (props) => {
         e.preventDefault();
         let date = e.target.name;
         const today = new Date();
-        const now = today.toLocaleString();
-        // let start = new Date(startDate);
-        // let end = new Date (endDate);
-        // проверяем, что выбранная дата окончания больше даты начала
-       
-        // if(date === "date end"){
-            
-        //     setEndDate(e.target.value)
-            
-        // }else {
-        //     setStartDate(e.target.value)
-        //     console.log(startDate)
-        // }
-        // if (new Date(startDate) > new Date(endDate)) {
-        //     alert("Дата начала не может быть позже даты окончания.");
-        //     e.target.value = now
-        // } else if (endDate > now) {
-        //     alert('Даты не могут находиться в будущем времени.')
-        // }
+        
+     //проверка диапазона дат- даты не должны быть больше текущей даты   
+        if (new Date(date === "date end"?e.target.value:endDate) >= today) {
+            setValidDates(false)
+        } else //дата начала не должна быть больще даты окончания
         if (new Date(date === "date end"?e.target.value:endDate) >= new Date(date === "date begin"?e.target.value:startDate)) {
-        // if (endDate >= startDate) {
-            if(date === "date end"){
-                // if (date>now) {
-                //     alert("Выбранная дата не может быть в будущем времени")
-                // }
+            if(date === "date end" ){
+          
                 setEndDate(e.target.value)
             }else {
                 setStartDate(e.target.value)
             }
             setValidDates(true);
-            console.log(startDate);
         } 
-        // else if ((new Date(endDate) > now) || (new Date(startDate) > now)) {
-        //     alert('Введите корректные данные');
-        //     setValidDates(false)
-        // } 
         else {setValidDates(false)}
         checkFields()
     };
@@ -322,7 +320,7 @@ const ScanPageForm = (props) => {
                     {/* <form> */}
 
                     <div className={css.inn}>
-                        <label htmlFor="true" id="inn">Инн компании<span className={errorInn ? css.invalidSpan : ''}>&#8432;</span></label>
+                        <label htmlFor="true" id="inn">Инн компании<span className={errorInn >= 1 ? css.invalidSpan : ''}>&#8432;</span></label>
                         <input className={css.innInput}
                         // className={clsx(css.innInput, errorInn ? css.invalid : "")} 
                         name="inn" id="inn" placeholder='10 или 12 цифр' value={inn} onChange={handleInnChange} required></input>
@@ -339,8 +337,9 @@ const ScanPageForm = (props) => {
                         </select>
                     </div>
                     <div className={css.docs}>
-                        <label htmlFor="true" id="quantity">Количество документов в выдаче<span className={!docs ? css.invalidSpan : ''}>&#8432;</span></label>
+                        <label htmlFor="true" id="quantity">Количество документов в выдаче<span className={docs>1000 ? css.invalidSpan : ''}>&#8432;</span></label>
                         <input className={css.docsInput} type="number" name="quantity" id="quantity" placeholder='От 1 до 1000' min='1' max='1000' value={docs} onChange={handleDocsChange} required></input>
+                        {/* {docs.length===0 && (<div className={css.message}>Обязательное поле</div>)} */}
                     </div>
                     <div className={css.range}>
                         <label>Диапазон поиска<span className={!validDates ? css.invalidSpan : ''}>&#8432;</span>

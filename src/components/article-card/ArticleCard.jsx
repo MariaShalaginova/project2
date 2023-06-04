@@ -1,31 +1,83 @@
 import css from './ArticleCard.module.css';
-import img from '../../assets/article-img.jpg';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import {decode} from 'html-entities';
 
-const ArticleCard = () => {
+const ArticleCard = (props) => {
+
+    const {card} = props;
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        
+        let token  = localStorage.getItem('tokenInfo');
+
+        //если нет токена, то перенаправление на страницу авторизации
+        if (!token) {
+            navigate('/login');
+        }        
+      }, []);
 
 
-    
+    const date = new Date(card?.issueDate).toLocaleDateString();
+    const {url, textNews} = getTextNews(card?.markup);
+
+    function imageUrl(decodedContent) {
+        const images=decodedContent.match(/<img src="(.*?)"/m);
+        return images ? images[1] : "";
+    };
+
+    function decodeTextNews(markup)  {
+        return decode(markup);
+    };
+
+    function removeAllTags(textNews) {
+        return textNews.replace(/<.*?>/g, ' ');
+    };
+
+    function getTextNews(markup) {
+       const decodedTextNews = decodeTextNews(card?.content?.markup);
+       const url = imageUrl(decodedTextNews);
+       const textNews = removeAllTags(decodedTextNews).slice(0, 700) + '...';
+
+       return {
+        url,
+        textNews
+       };
+    }
+
+    function openUrl() {
+        window.open(card.url, "_blank");
+    };
+   
+    function getTypeNews(attributes) {
+        if (attributes?.isTechNews) {
+            return "Технические новости"
+        };
+        if (attributes?.isAnnouncement) {
+            return "Анонсы и события"
+        };
+        if (attributes?.isDigest) {
+            return "Сводки новостей"
+        };
+    }
+
     return (
         <div className={css.card}>
             <div className={css.cardTop}> 
-                <p>13.09.2021</p>&nbsp;&nbsp; 
-                <a href='#'>Комсомольская правда kp.ru</a>
+                <p>{date}</p>&nbsp;&nbsp; 
+                <a href='#'>{card?.source.name}</a>
             </div>    
 
-            <h3>Скиллфэктори - лучшая онлайн-школа для будущих айтишников</h3>
-            <button className={css.newsButton} type='button'>Технические новости</button>
-            <img src={img} alt="article img"/>
+            <h3>{card?.title.text}</h3>
+            <div className={css.newsType}>{getTypeNews(card?.attributes)}</div>
+            {url && (<img className={css.imgNews} src={url} alt='news img' />)}
              <div className={css.text}>
-                <p>SkillFactory — школа для всех, кто хочет изменить свою карьеру и жизнь. 
-                    С 2016 года обучение прошли 20 000+ человек из 40 стран с 4 континентов, самому взрослому студенту сейчас 86 лет.
-                    Выпускники работают в Сбере, Cisco, Bayer, Nvidia, МТС, Ростелекоме, Mail.ru, Яндексе, Ozon и других топовых компаниях.
-                    Принципы SkillFactory: акцент на практике, забота о студентах и ориентир на трудоустройство. 
-                    80% обучения — выполнение упражнений и реальных проектов. Каждого студента поддерживают менторы, 2 саппорт-линии и комьюнити курса.
-                    А карьерный центр помогает составить резюме, подготовиться к собеседованиям и познакомиться с IT-рекрутерами.</p>
+                <div><p>{textNews}</p></div>
             </div> 
             <div className={css.cardBottom}> 
-                <button className={css.readButton}>Читать в источнике</button>
-                <div className={css.words}>222 слова</div>
+                <button className={css.readButton} onClick={openUrl}>Читать в источнике</button>
+                <div className={css.words}><p>{card?.attributes.wordCount} слов</p></div>
             </div>    
                     
         </div>

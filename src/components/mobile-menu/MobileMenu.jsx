@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import css from './MobileMenu.module.css';
-import logo from '../../assets/logo-footer.svg'
-import { Link } from 'react-router-dom'
-import closeIcon from '../../assets/close-icon.svg'
+import logo from '../../assets/logo-footer.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import closeIcon from '../../assets/close-icon.svg';
 
 const MobileMenu = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const navigate = useNavigate();
 
-const handleToggleClick = () => {
-setIsOpen(!isOpen);
-};
+    const handleToggleClick = () => {
+        setIsOpen(!isOpen);
+    };
 	// const [isProfileOpen, setIsProfileOpen] = useState(false);
 
 	return (
@@ -35,7 +36,7 @@ setIsOpen(!isOpen);
                     <p>Зарегистрироваться</p>
                 </div>
 
-                <button type='button' className={css.userButton}>
+                <button type='button' className={css.userButton} onClick={async event => {navigate('/login')}}>
                     Войти
                 </button>
             

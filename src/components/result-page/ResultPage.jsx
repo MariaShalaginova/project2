@@ -1,16 +1,44 @@
 import css from './ResultPage.module.css';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
 import resultImg from '../../assets/result-img.png'
 // import paper from '../../assets/document.jpg';
 // import folders from '../../assets/folders.jpg';
 // import scanImg from '../../assets/scan-img.png';
 // import ScanPageForm from '../forms/ScanPageForm';
 import Result from '../result-carousel/ResultCarousel';
-import ArticleCard from '../article-card/ArticleCard';
+import { useNavigate } from 'react-router-dom';
+// import ArticleCard from '../article-card/ArticleCard';
+
+const initialItemsToShow = 10;
+const itemsPerLoad = 10;
+
+const LazyResult = lazy(() => import('../article-card/ArticleCard'));
 
 const ResultPage = (props) => {
     const {token, isLoading, histogram, article} = props;
-
+    const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
+    const [isLastPage, setIsLastPage] = useState(false);
     console.log(article);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        
+        let token  = localStorage.getItem('tokenInfo');
+
+        //если нет токена, то перенаправление на страницу авторизации
+        if (!token) {
+            navigate('/login');
+        } else {
+            token = JSON.parse(token);
+        
+            const expireDate = token.expire; // сравниваем текущую дату с датой истечения токена
+          
+            if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {
+              localStorage.removeItem("tokenInfo"); // Удалить данные из localStorage
+              navigate('/login'); // Перенаправление на страницу авторизации
+            }
+        }        
+      }, []);
 
     //изменение окончания слова "Вариант" в зависимости от количества 
     function pluralize(count, singular, plural) {
@@ -23,18 +51,48 @@ const ResultPage = (props) => {
         return plural;
       }
 
+    const loadMoreItems = () => {
+        setItemsToShow(itemsToShow + itemsPerLoad);
+    }; 
+
+    let cards;
+
+
+    //если приходят данные о публикациях, то выводим их через ленивую загрузку
+    if (article) {
+        cards = article.map((card, index) => (
+        <Suspense key={index} fallback={<div>Loading...</div>}>
+          {index < itemsToShow && <LazyResult card={card?.ok} index={index} />}
+        </Suspense>
+      ));
+    }
+    
+    // Определяем, является ли текущая страница последней
+    if (itemsToShow >= 100) {
+        setIsLastPage(true);
+    }
+
+    // function Result({ index }) {
+    //     return <div>Результат {index + 1}</div>;
+    //   }
+
+
     return (
         <div className={css.wrapper}>
             <div className={css.content}>
-                <div className={css.text}>
-                    <h1>Ищем. Скоро будут результаты</h1>
-                    <p>Поиск может занять некоторое время, <br/>
-                    просим сохранять терпение.</p>
-                </div>
-                
-                <div className={css.img}>
-                        <img src={resultImg} alt="aim"/>
-                </div> 
+                {!histogram && (
+                    <>
+                        <div className={css.text}>
+                            <h1>Ищем. Скоро будут результаты</h1>
+                            <p>Поиск может занять некоторое время, <br/>
+                            просим сохранять терпение.</p>
+                        </div>
+                        
+                        <div className={css.img}>
+                                <img src={resultImg} alt="aim"/>
+                        </div>
+                    </>
+                )} 
 
             </div>
             <div className={css.summary}>   
@@ -46,10 +104,13 @@ const ResultPage = (props) => {
             <h3>Список документов</h3>
 
             <div className={css.cards}>
-                <ArticleCard /> 
+                {/* <ArticleCard />  */}
+                {cards}
             </div>
 
-            <button className={css.showMoreButton} type='button'>Показать больше</button>  
+            
+                 {!isLastPage && <button className={css.showMoreButton} onClick={loadMoreItems}>Показать больше</button>}
+            {/* <button className={css.showMoreButton} type='button'>Показать больше</button>   */}
                
         </div>
     )

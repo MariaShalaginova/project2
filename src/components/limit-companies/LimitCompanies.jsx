@@ -48,14 +48,14 @@ const LimitCompanies = (props) => {
                     <p>Лимит по компаниям</p>
                 </div>
                 <div className={css.count}>
-                    <p className={css.countCompanies}>{companyData.usedCompanyCount}</p>
-                    <p className={css.countLimit}>{companyData.companyLimit}</p>
+                    <p className={css.countCompanies}>{companyData?.usedCompanyCount}</p>
+                    <p className={css.countLimit}>{companyData?.companyLimit}</p>
                 </div>
                 <div className={css.textMobile}>
                     <p className={css.par}>Использовано компаний</p>
-                    <p className={css.countCompanies}>{companyData.usedCompanyCount}</p>
+                    <p className={css.countCompanies}>{companyData?.usedCompanyCount}</p>
                     <p className={css.par}>Лимит по компаниям</p>
-                    <p className={css.countLimit}>{companyData.companyLimit}</p>
+                    <p className={css.countLimit}>{companyData?.companyLimit}</p>
                 </div>
                 </>
                  )
