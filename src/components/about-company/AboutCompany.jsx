@@ -20,10 +20,6 @@ const AboutCompany = () => {
             <div className={css.imageMobile}>
                 <img src={AboutCompanyFotoMobile} alt="about company mobile foto"/>
             </div>
-            {/* <Routes>
-                <Route exact path="/" element={<Board {...props} />} />
-                <Route path="/tasks/:taskId" element={<TaskDetail {...props} />} />             
-            </Routes> */}
         </section>
     )
 }

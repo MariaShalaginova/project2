@@ -5,21 +5,21 @@ import Headermenu from '../headermenu/Headermenu'
 import UserLogin from '../user-login/UserLogin'
 import LimitCompanies from '../limit-companies/LimitCompanies'
 import UserAvatar from '../user-avatar/UserAvatar'
-// import Loader from '../loader/Loader'
 import MobileMenu from "../mobile-menu/MobileMenu";
-// import { Route, Routes} from 'react-router-dom';
-// import UserPage from '../user-login-page/UserPage'
-
+import { useSelector } from "react-redux";
 
 function Header(props) {  
-    
-    //const {token} = props;
-
-    let token  = localStorage.getItem('tokenInfo')
-    // console.log(token);
-    token = JSON.parse(token);
     const [isOpen, setIsOpen] = useState(false);
+    //получаем состояние isAuthenticated с помощью хука useSelector и рендерим нужный контент в зависимости от состояния.
+    let { isAuthenticated } = useSelector((state) => state.auth);  
 
+    let token  = localStorage.getItem('tokenInfo'); //получаем токен из локалстораджа 
+
+    if(token){
+        token = JSON.parse(token);
+    }
+
+    //функция изменения состояния мобильного меню
     const handleToggleClick = () => {
         setIsOpen(!isOpen);
     };
@@ -30,34 +30,21 @@ function Header(props) {
             <div>
                 <img src={logo} alt="logo" />
             </div>
-            {/* <div className={css.gamburger}>
-                <button type="button" className={css.toggle} onClick={handleToggleClick}>
-                    <span className={css.line}></span>
-                    <span className={css.line}></span>
-                    <span className={css.line}></span>
-                </button>      
-            </div> */}
 
             {isOpen && (<MobileMenu />)}
-            {/* <div className={css.userMenu}>{UserLogin} */}
             
-                <Headermenu />
+            <Headermenu />
                 
-                {/* <LimitCompanies /> */}
-                {/* <Loader /> */}
-            {!token && (
+            {!isAuthenticated && (
                 <UserLogin /> 
             )}    
                 
-            {token && (<>
+            {isAuthenticated && (<>
                 <LimitCompanies token={token}/>
                 <UserAvatar />
                 </>
             )}
-                {/* <UserAvatar /> */}
-                {/* {<UserLogin />&&()} */}
-                {/* <img src="/img/user-avatar.svg" alt="user-avatar"/>
-                <img src="/img/arrow-down.svg" alt="user-arrow"/> */}
+               
             <div className={css.gamburger}>
                 <button type="button" className={css.toggle} onClick={handleToggleClick}>
                     <span className={css.line}></span>
@@ -69,4 +56,5 @@ function Header(props) {
         </header>
     )
 }
+
 export default Header

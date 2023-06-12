@@ -2,51 +2,44 @@ import css from './UserLoginForm.module.css';
 import { useState } from "react";
 import lockLogin from '../../assets/lock-login.svg'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authenticate} from '../../store/actions';
 
 const UserLoginForm = (props) => { 
 
-    const {setToken} = props;
-
+    const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    // const [loginError, setLoginError] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
-    // const [error, setError] = useState('');
-    const navigate = useNavigate();
 
-    // const pattern = /^(?=.*[a-zA-Z])[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*(\+[1-9]\d{1,14}|[0-9]{7,14})?$/;
-    // const pattern =  /^[a-z0-9_-]{3,16}$/
+    const dispatch = useDispatch();
+    
+    //ввод логина в поле инпут
     function handleLoginChange(e) {
         setLogin(e.target.value);
         setButtonDisabled(!e.target.value || !password);
-        // if (!login) {
-        //     setError('Введите корректные данные')
-        // }
     }
     
+    //ввод пароля в поле инпут
     function handlePasswordChange(e) {
         setPassword(e.target.value);
         setButtonDisabled(!login || !e.target.value);
     }    
 
-    async function handleLogin(e) {
-        const tokenInfo = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                "login": login,
-                "password": password
-              })
-          });
-
-        const result = await tokenInfo.json(); 
+    //отправка формы
+    const handleLogin = (e) => {
+        e.preventDefault();
+        //проверка правильности логина
+        // const pattern = /^\d{10}$|^[\w]+/;
+        // if (!pattern.test(login)) {
+        //     setLoginError(true);
+        // } else {
+        //     setLoginError("");}
+        dispatch(authenticate(login, password));
+        navigate('/');
         
-        localStorage.setItem('tokenInfo', JSON.stringify(result));
-        setToken(JSON.stringify(result));
-        navigate('/')
-        // const savedUser = JSON.parse(localStorage.getItem('user'));
-    }
+    };
 
     return (
         
@@ -61,7 +54,7 @@ const UserLoginForm = (props) => {
                     <div className={css.login}>
                         <label htmlFor="login" id="login">Логин или номер телефона:</label>
                         <input type="text" name="login" id="login" value={login} onChange={handleLoginChange}></input>
-                        {/* {pattern.test(login) && (<div className={css.message}>Введите корректные данные</div>)} */}
+                        {/* {loginError && (<div className={css.message}>Введите корректные данные</div>)} */}
                     </div>
                     <div className={css.login}>
                         <label htmlFor="password" id="password">Пароль:</label>

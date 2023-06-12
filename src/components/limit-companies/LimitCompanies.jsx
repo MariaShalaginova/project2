@@ -5,24 +5,22 @@ import { useEffect, useState } from 'react';
 const LimitCompanies = (props) => {
 
     const {token} = props;
-    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [companyData, setCompanyData] = useState({});
 
+    //получение данных о компании для хэдера
     useEffect(() => {
+        async function fetchData() {           
+            await getCompanies();
+        }
 
-        async function fetchData() {
-           
-            const result= await getCompanies();
-            setData(result)
-          }
-          fetchData();
-         
-      }, []);
+        fetchData(); 
+        // eslint-disable-next-line        
+    }, []);
 
     
     async function getCompanies() {
-        setIsLoading(true);
+        setIsLoading(true); //пока идет запрос , будет грузится лоадер
 
         const response = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info", {
             method: 'GET',
@@ -34,10 +32,9 @@ const LimitCompanies = (props) => {
 
         const result = await response.json();
         setIsLoading(false);
-        setCompanyData(result.eventFiltersInfo);        
-    }
+        setCompanyData(result.eventFiltersInfo);  //сэтаем полученные данные о компаниях      
+    };
      
-
     return (
         <div className={css.limit}>
             {isLoading ? (
@@ -61,7 +58,7 @@ const LimitCompanies = (props) => {
                  )
             }
         </div>
-    )
-}
+    );
+};
 
 export default LimitCompanies

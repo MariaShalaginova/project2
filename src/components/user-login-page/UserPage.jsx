@@ -3,8 +3,6 @@ import people from '../../assets/user-page.jpg';
 import UserLoginForm from '../forms/UserLoginForm';
 
 const UserPage = (props) => {
-    
-    const {setToken} = props;
 
     return (
         <div className={css.wrapper}>
@@ -16,7 +14,7 @@ const UserPage = (props) => {
                 {/* <div className={css.formBlock}>
                     <UserLoginForm />
                 </div> */}
-                <UserLoginForm setToken={setToken}/>
+                <UserLoginForm />
                 <div className={css.userPageMobile}>
                     <img src={people} alt="people"/>
                 </div>

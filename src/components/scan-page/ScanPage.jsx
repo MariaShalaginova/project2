@@ -6,7 +6,7 @@ import ScanPageForm from '../forms/ScanPageForm';
 
 const ScanPage = (props) => {
 
-    const {token, isLoading, setIsLoading, setHistogram, setArticle} = props;
+    const { isLoading, setIsLoading, setHistogram, setArticle} = props;
     return (
         <div className={css.wrapper}>
             
@@ -17,7 +17,7 @@ const ScanPage = (props) => {
                     <div className={css.docsMobile}>
                         <img src={paper} alt="document"/>
                     </div>    
-                    <ScanPageForm token={token} setHistogram={setHistogram} isLoading={isLoading} setIsLoading={setIsLoading} setArticle={setArticle}/>    
+                    <ScanPageForm setHistogram={setHistogram} setIsLoading={setIsLoading} setArticle={setArticle}/>    
                 </div>
                 <div className={css.images}>
                     <div className={css.docs}>
@@ -28,15 +28,8 @@ const ScanPage = (props) => {
                         <img src={scanImg} alt="scan page img"/>
                     </div>
                 </div>    
-                {/* <div className={css.formBlock}>
-                    <UserLoginForm />
-                </div> */}
-                {/* <UserLoginForm />
-                <div className={css.userPageMobile}>
-                    <img src={people} alt="people"/>
-                </div> */}
         </div>
-    )
-}
+    );
+};
 
 export default ScanPage

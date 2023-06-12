@@ -1,11 +1,4 @@
 import css from './ResultCarousel.module.css';
-import { useState } from 'react';
-// import Magnifier from '../../assets/magnifier.svg';
-// import Clock from '../../assets/clock.svg';
-// import Lock from '../../assets/lock.svg';
-// import ChevronLeft from '../../assets/chevron-left.svg';
-// import ChevronRight from '../../assets/chevron-right.svg';
-// import Loader from '../loader/Loader';
 import Spinner from '../loader/Spinner';
 import Slider from "react-slick";
 import "./slick.css";
@@ -33,15 +26,6 @@ const Result= (props) => {
               initialSlide: 1
             }
           },
-        //   {
-        //     breakpoint: 768,
-        //     settings: {
-        //       slidesToShow: 1,
-        //       slidesToScroll: 1,
-        //       initialSlide: 1,
-        //       infinite: false
-        //     }
-        //   },
           {
             breakpoint: 480,
             settings: {
@@ -52,15 +36,12 @@ const Result= (props) => {
             }
           }
         ]
-      };
+    };
     
     return (
 
         <div className={css.wrapper}>   
             <div className={css.carousel}>
-                {/* <div className={css.chevronLeft}>
-                    <img src={ChevronLeft} alt="chevron left img"/>
-                </div> */}
                 <div className={css.summaryBlock}>
                         <div className={css.text}>
                                 <p>Период</p>
@@ -80,11 +61,7 @@ const Result= (props) => {
                             {
                                 histogram.length? 
                                 histogram.map((company, index) => {
-                                    // const date = new Date(company.date);
-
-                                    // const year = date.getFullYear();
-                                    // const month = ('0' + (date.getMonth() + 1)).slice(-2); // добавляем ноль в начале, если месяц < 10
-                                    // const day = ('0' + date.getDate()).slice(-2); // добавляем ноль в начале, если число < 10
+                                
                                     const date = new Date(company.date).toLocaleDateString()
                                 
                                     return (

@@ -61,11 +61,6 @@
 
 .text {
     margin: 20px auto 32px auto;
-    /* color: #000000;
-    opacity: 0.5;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.02em; */
 }
 
 .readButton {
@@ -86,7 +81,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 35px;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .words {

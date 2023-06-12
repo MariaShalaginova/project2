@@ -15,7 +15,7 @@ const itemsPerLoad = 10;
 const LazyResult = lazy(() => import('../article-card/ArticleCard'));
 
 const ResultPage = (props) => {
-    const {token, isLoading, histogram, article} = props;
+    const { isLoading, histogram, article} = props;
     const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
     const [isLastPage, setIsLastPage] = useState(false);
     console.log(article);
@@ -33,12 +33,12 @@ const ResultPage = (props) => {
         
             const expireDate = token.expire; // сравниваем текущую дату с датой истечения токена
           
-            if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {
-              localStorage.removeItem("tokenInfo"); // Удалить данные из localStorage
+            if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {//если токен истек
+              localStorage.removeItem("tokenInfo"); // Удаление данные из localStorage
               navigate('/login'); // Перенаправление на страницу авторизации
             }
         }        
-      }, []);
+      }, [navigate]);
 
     //изменение окончания слова "Вариант" в зависимости от количества 
     function pluralize(count, singular, plural) {
@@ -49,7 +49,7 @@ const ResultPage = (props) => {
         }
         // Если count не равен 1, вернуть plural
         return plural;
-      }
+    }
 
     const loadMoreItems = () => {
         setItemsToShow(itemsToShow + itemsPerLoad);
@@ -72,11 +72,6 @@ const ResultPage = (props) => {
         setIsLastPage(true);
     }
 
-    // function Result({ index }) {
-    //     return <div>Результат {index + 1}</div>;
-    //   }
-
-
     return (
         <div className={css.wrapper}>
             <div className={css.content}>
@@ -98,7 +93,7 @@ const ResultPage = (props) => {
             <div className={css.summary}>   
                 <h3>Общая сводка</h3>
                 <p>Найдено {histogram.length} {pluralize(histogram.length, 'вариант', 'варианта', 'вариантов')}</p>
-                <Result token={token} histogram={histogram} isLoading={isLoading}/>
+                <Result histogram={histogram} isLoading={isLoading}/>
                 
             </div>         
             <h3>Список документов</h3>

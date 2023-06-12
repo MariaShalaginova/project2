@@ -11,7 +11,6 @@ const MobileMenu = () => {
     const handleToggleClick = () => {
         setIsOpen(!isOpen);
     };
-	// const [isProfileOpen, setIsProfileOpen] = useState(false);
 
 	return (
         <div className={isOpen ? css.menu : css.menuHide}>
@@ -19,11 +18,9 @@ const MobileMenu = () => {
                 <div className={css.header}>
                     <img src={logo} alt="logo" />
                 
-                {/* <Link to='/'> */}
                 <div onClick={handleToggleClick}>
                     <img src={closeIcon} alt="close"/>
                 </div>    
-                {/* </Link> */}
 
                 </div>
                     <ul className={css.list}>
