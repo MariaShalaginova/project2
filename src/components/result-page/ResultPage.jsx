@@ -16,7 +16,7 @@ const ResultPage = (props) => {
     const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
     const [isLastPage, setIsLastPage] = useState(false);
     let { isAuthenticated } = useSelector((state) => state.auth);  
-    console.log(article);
+    //console.log(article);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -34,7 +34,7 @@ const ResultPage = (props) => {
     let cards;
 
     //если приходят данные о публикациях, то выводим их через ленивую загрузку
-    if (article) {
+    if (article.length) {
         cards = article.map((card, index) => (
         <Suspense key={index} fallback={<div>Loading...</div>}>
           {index < itemsToShow && <LazyResult card={card?.ok} index={index} />}

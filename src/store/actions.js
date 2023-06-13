@@ -45,12 +45,20 @@ export const authenticate = (login, password) => async (dispatch) => {
               "password": password
             }),
         });
-      
-      const result = await tokenInfo.json();
 
-      localStorage.setItem('tokenInfo', JSON.stringify(result));
-  
-      dispatch(authSuccess(result));
+      if(tokenInfo.status ===  401){
+        let message = 'Не правильный логин или пароль';
+        dispatch({ type: AUTH_FAILURE, payload: message });
+        localStorage.removeItem('tokenInfo');
+      }
+
+      if(tokenInfo.status ===  200){
+        const result = await tokenInfo.json();
+
+        localStorage.setItem('tokenInfo', JSON.stringify(result));
+    
+        dispatch(authSuccess(result));
+      } 
 
     } catch (error) {
       dispatch({ type: AUTH_FAILURE, payload: error.message});

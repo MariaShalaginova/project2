@@ -19,7 +19,8 @@ if (token) {
 const initialState = {
     token: token || null,
     isLoading: false,
-    isAuthenticated: isExpireDate ? false : true
+    isAuthenticated: isExpireDate ? false : true,
+    wrongPasswordOrLogin: ""
   };
 
 const authReducer = (state = initialState, action) => {
@@ -30,7 +31,7 @@ const authReducer = (state = initialState, action) => {
     case AUTH_SUCCESS:
       return { ...state, token: action.payload.token, isLoading: false, isAuthenticated: true };
     case AUTH_FAILURE:
-      return { ...state, error: action.payload.error, isLoading: false };
+      return { ...state, error: action.payload.error, isLoading: false, wrongPasswordOrLogin: action.payload };
     case AUTH_LOGOUT:
       return { ...state,
         token: null,

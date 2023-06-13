@@ -270,26 +270,27 @@ const ScanPageForm = (props) => {
 
 //получение массива данных для вывода сводки в карусели
     function dispatchResultItems(result) {
-        const docs = result.data[0].data;
-        const risk = result.data[1].data;
-        let newData = [];
-
-        for(let i = 0;i<docs.length;i++){
-            newData.push({
-                id: i+1,
-                date: docs[i].date,
-                numberDosc:docs[i].value
-            })       
-        };
-
-        for(let i = 0;i<risk.length;i++){  
-            newData[i].riskNumber = risk[i].value
-        };
-
-        setHistogram(newData);
-        
-        console.log(newData);
-
+        if(result.length || result.data){
+            const docs = result.data[0].data;
+            const risk = result.data[1].data;
+            let newData = [];
+    
+            for(let i = 0;i<docs.length;i++){
+                newData.push({
+                    id: i+1,
+                    date: docs[i].date,
+                    numberDosc:docs[i].value
+                })       
+            };
+    
+            for(let i = 0;i<risk.length;i++){  
+                newData[i].riskNumber = risk[i].value
+            };
+    
+            setHistogram(newData);
+            
+            console.log(newData);
+        }
     }
     
     //получаем объект из массива айди публикаций

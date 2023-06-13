@@ -4,6 +4,7 @@ import lockLogin from '../../assets/lock-login.svg'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authenticate} from '../../store/actions';
+import { useSelector } from "react-redux";
 
 const UserLoginForm = (props) => { 
 
@@ -12,6 +13,7 @@ const UserLoginForm = (props) => {
     const [password, setPassword] = useState('');
     // const [loginError, setLoginError] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    let { wrongPasswordOrLogin } = useSelector((state) => state.auth);  
 
     const dispatch = useDispatch();
     
@@ -37,8 +39,7 @@ const UserLoginForm = (props) => {
         // } else {
         //     setLoginError("");}
         dispatch(authenticate(login, password));
-        navigate('/');
-        
+        navigate('/');        
     };
 
     return (
@@ -59,7 +60,7 @@ const UserLoginForm = (props) => {
                     <div className={css.login}>
                         <label htmlFor="password" id="password">Пароль:</label>
                         <input type="password" name="password" id="password"  value={password} onChange={handlePasswordChange}></input>
-                        {!password && (<div className={css.message}>Неправильный пароль</div>)}
+                        {(<div className={css.message}>{wrongPasswordOrLogin}</div>)}
                     </div>
                     <button type="button" onClick={handleLogin} disabled={buttonDisabled}>Войти</button>
 
