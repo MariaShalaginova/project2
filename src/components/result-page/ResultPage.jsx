@@ -1,45 +1,31 @@
 import css from './ResultPage.module.css';
 import React, { useState, lazy, Suspense, useEffect } from 'react';
 import resultImg from '../../assets/result-img.png'
-// import paper from '../../assets/document.jpg';
-// import folders from '../../assets/folders.jpg';
-// import scanImg from '../../assets/scan-img.png';
-// import ScanPageForm from '../forms/ScanPageForm';
 import Result from '../result-carousel/ResultCarousel';
 import { useNavigate } from 'react-router-dom';
-// import ArticleCard from '../article-card/ArticleCard';
 import pluralize from '../../utils/plural';
+import { useSelector } from "react-redux";
 
 const initialItemsToShow = 10;
 const itemsPerLoad = 10;
-
+//импорт карточек для ленивой загрузки
 const LazyResult = lazy(() => import('../article-card/ArticleCard'));
 
 const ResultPage = (props) => {
     const { isLoading, histogram, article} = props;
     const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
     const [isLastPage, setIsLastPage] = useState(false);
+    let { isAuthenticated } = useSelector((state) => state.auth);  
     console.log(article);
 
     const navigate = useNavigate();
     useEffect(() => {
-        
-        let token  = localStorage.getItem('tokenInfo');
 
-        //если нет токена, то перенаправление на страницу авторизации
-        if (!token) {
+        if( !isAuthenticated) {
             navigate('/login');
-        } else {
-            token = JSON.parse(token);
-        
-            const expireDate = token.expire; // сравниваем текущую дату с датой истечения токена
-          
-            if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {//если токен истек
-              localStorage.removeItem("tokenInfo"); // Удаление данные из localStorage
-              navigate('/login'); // Перенаправление на страницу авторизации
-            }
-        }        
-      }, [navigate]);
+        }
+   
+      }, [navigate,isAuthenticated]);
 
     const loadMoreItems = () => {
         setItemsToShow(itemsToShow + itemsPerLoad);
