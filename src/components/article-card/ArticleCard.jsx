@@ -2,6 +2,7 @@ import css from './ArticleCard.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
 import {decode} from 'html-entities';
+import pluralize from '../../utils/plural';
 
 const ArticleCard = (props) => {
 
@@ -83,7 +84,7 @@ const ArticleCard = (props) => {
             </div> 
             <div className={css.cardBottom}> 
                 <button className={css.readButton} onClick={openUrl}>Читать в источнике</button>
-                <div className={css.words}><p>{card?.attributes.wordCount} слов</p></div>
+                <div className={css.words}><p>{card?.attributes.wordCount} {pluralize(card.attributes.wordCount, ['слово', 'слова', 'слов'])}</p></div>
             </div>    
                     
         </div>

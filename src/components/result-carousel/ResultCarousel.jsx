@@ -7,6 +7,7 @@ import "./slick-theme.css";
 const Result= (props) => {
     const {isLoading, histogram } = props;
     
+    //настраиваем слайдер
     const settings = {
         dots: false,
         infinite: false,
@@ -57,7 +58,7 @@ const Result= (props) => {
                                     </div>
                                 </>): ''}
                                 
-                            <Slider {...settings}>
+                            <Slider {...settings}> 
                             {
                                 histogram.length? 
                                 histogram.map((company, index) => {
@@ -68,9 +69,6 @@ const Result= (props) => {
                                         <>
                                             <div className={css.item}>
                                                 <div className={css.data} key={index}>
-                                                    {/* <p>{day}.{month}.{year}</p>
-                                                    <p>{company.numberDosc}</p>
-                                                    <p>{company.riskNumber}</p> */}
                                                     <p>{date}</p>
                                                     <p>{company.numberDosc}</p>
                                                     <p>{company.riskNumber}</p>

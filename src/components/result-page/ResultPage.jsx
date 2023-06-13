@@ -8,6 +8,7 @@ import resultImg from '../../assets/result-img.png'
 import Result from '../result-carousel/ResultCarousel';
 import { useNavigate } from 'react-router-dom';
 // import ArticleCard from '../article-card/ArticleCard';
+import pluralize from '../../utils/plural';
 
 const initialItemsToShow = 10;
 const itemsPerLoad = 10;
@@ -40,23 +41,11 @@ const ResultPage = (props) => {
         }        
       }, [navigate]);
 
-    //изменение окончания слова "Вариант" в зависимости от количества 
-    function pluralize(count, singular, plural) {
-        
-        // Если count равен 1, вернуть singular
-        if (count === 1) {
-          return singular;
-        }
-        // Если count не равен 1, вернуть plural
-        return plural;
-    }
-
     const loadMoreItems = () => {
         setItemsToShow(itemsToShow + itemsPerLoad);
     }; 
 
     let cards;
-
 
     //если приходят данные о публикациях, то выводим их через ленивую загрузку
     if (article) {
@@ -92,14 +81,13 @@ const ResultPage = (props) => {
             </div>
             <div className={css.summary}>   
                 <h3>Общая сводка</h3>
-                <p>Найдено {histogram.length} {pluralize(histogram.length, 'вариант', 'варианта', 'вариантов')}</p>
+                <p>Найдено {histogram.length} {pluralize(histogram.length, ['вариант', 'варианта', 'вариантов'])}</p>
                 <Result histogram={histogram} isLoading={isLoading}/>
                 
             </div>         
             <h3>Список документов</h3>
 
             <div className={css.cards}>
-                {/* <ArticleCard />  */}
                 {cards}
             </div>
 
