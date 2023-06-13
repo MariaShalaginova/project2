@@ -6,7 +6,8 @@ import ScanPageForm from '../forms/ScanPageForm';
 
 const ScanPage = (props) => {
 
-    const { isLoading, setIsLoading, setHistogram, setArticle} = props;
+    const { setIsLoading, setHistogram, setArticle} = props;
+    
     return (
         <div className={css.wrapper}>
             

@@ -1,15 +1,25 @@
 import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT } from './actions.js';
 
-// const initialState = {
-//   token: '',
-//   isLoading: false,
-//   error: null,
-// };
+let token  = localStorage.getItem('tokenInfo'); //получаем токен из локалстораджа 
+
+
+let isExpireDate  = true;
+
+if (token) {
+    token = JSON.parse(token);
+    const expireDate = token.expire; // сравниваем текущую дату с датой истечения токена
+  
+    if (new Date().toLocaleDateString() > new Date(expireDate).toLocaleDateString()) {
+      localStorage.removeItem("tokenInfo"); // Удалить данные из localStorage     
+    } else {
+      isExpireDate = false;
+    }
+}        
 
 const initialState = {
-    token: null,
+    token: token || null,
     isLoading: false,
-    isAuthenticated: false,
+    isAuthenticated: isExpireDate ? false : true
   };
 
 const authReducer = (state = initialState, action) => {
