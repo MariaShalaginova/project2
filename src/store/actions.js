@@ -3,6 +3,8 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
+export const loginUrl = 'https://gateway.scan-interfax.ru/api/v1/account/login';
+
 export const logout = () => (dispatch) => {
   dispatch({
     type: AUTH_LOGOUT,
@@ -35,7 +37,7 @@ export const authenticate = (login, password) => async (dispatch) => {
 
       dispatch({ type: AUTH_REQUEST });
 
-      const tokenInfo = await fetch("https://gateway.scan-interfax.ru/api/v1/account/login", {
+      const tokenInfo = await fetch(loginUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -47,7 +49,7 @@ export const authenticate = (login, password) => async (dispatch) => {
         });
 
       if(tokenInfo.status ===  401){
-        let message = 'Не правильный логин или пароль';
+        let message = 'Неправильный логин или пароль';
         dispatch({ type: AUTH_FAILURE, payload: message });
         localStorage.removeItem('tokenInfo');
       }
