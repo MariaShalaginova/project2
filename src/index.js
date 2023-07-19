@@ -14,9 +14,9 @@ root.render(
   <Provider store={store}>
   <React.StrictMode>
     <BrowserRouter>
-     {/* <Provider store={store}> */}
+     
      <ReduxApp />
-    {/* </Provider> */}
+    
     </BrowserRouter>   
   </React.StrictMode>
   </Provider>
